@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements RvClickListener {
 
     private EditText edtSearch;
     private RecyclerView rvImageList;
+    private ImageDataClass responseData;
     private Context context = MainActivity.this;
 
     private ImagesListAdapter imagesListAdapter;
@@ -79,11 +81,20 @@ public class MainActivity extends AppCompatActivity implements RvClickListener {
                 (response, error, status) -> handleAPIResponse(response, error, status));
     }
 
+    /**
+     * handle the response received from the server
+     * if the response is success
+     * set the image list to the recyclerview
+     * else show the error message
+     * @param response
+     * @param error
+     * @param status
+     */
     private void handleAPIResponse(String response, VolleyError error, String status) {
         Log.e("response_Login", ":" + response);
         if (status.equals("response")) {
             try {
-                ImageDataClass responseData = (ImageDataClass) Utils.parseResponse(response, ImageDataClass.class);
+                responseData = (ImageDataClass) Utils.parseResponse(response, ImageDataClass.class);
                 if (responseData.getSuccess()) {
                     setImagesList(responseData.getData());
                 }
@@ -92,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements RvClickListener {
                 e.printStackTrace();
             }
         } else if (status.equals("error")) {
-            Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
             // TODO: Handle error
         }
     }
@@ -107,6 +118,9 @@ public class MainActivity extends AppCompatActivity implements RvClickListener {
 
     @Override
     public void rv_click(int position, int value, String key) {
-
+        Intent mIntent = new Intent(MainActivity.this,DetailImageActivity.class);
+        mIntent.putExtra("title",responseData.getData().get(position).getTitle());
+        mIntent.putExtra("image",responseData.getData().get(position).getImages().get(0).getLink());
+        startActivity(mIntent);
     }
 }

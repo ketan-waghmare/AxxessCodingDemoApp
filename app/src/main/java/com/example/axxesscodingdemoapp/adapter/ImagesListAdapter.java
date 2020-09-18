@@ -79,6 +79,9 @@ public class ImagesListAdapter extends RecyclerView.Adapter<ImagesListAdapter.Vi
         if (dataList.get(position).getImages() != null && dataList.get(position).getImages().size() > 0)
             Utils.ImageLoaderWith(context, dataList.get(position).getImages().get(0).getLink(), holder.ivImage);
 
+        itemView.setOnClickListener(view -> {
+            rvClickListener.rv_click(position,position,"");
+        });
     }
 
     @Override
