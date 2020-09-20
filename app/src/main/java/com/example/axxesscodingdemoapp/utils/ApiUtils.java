@@ -8,5 +8,5 @@ public class ApiUtils {
 //    private static String SERVER_URL = "45.252.190.217";            // Updated server  vv- 31-03-2020
 //    private static String SERVER_URL = "192.168.43.40/medicine-backend/public";
 
-    public static String GET_IMAGES = PROTOCOL + SERVER_URL + "/3/gallery/search/1?q=vanilla";
+    public static String GET_IMAGES = PROTOCOL + SERVER_URL + "/3/gallery/search/1?q=";
 }

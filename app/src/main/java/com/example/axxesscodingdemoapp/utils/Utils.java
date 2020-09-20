@@ -14,6 +14,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -21,6 +25,9 @@ import java.net.URL;
  */
 
 public class Utils {
+
+
+    public static final String MM_DD_YYY_HH_MM = "MM/dd/yyyy HH:mm";
 
     public static Object parseResponse(String result, Class class_object) {
         Gson gson = new Gson();
@@ -60,6 +67,17 @@ public class Utils {
             Log.e("Exception",e.getMessage());
             return null;
         }
+    }
+
+
+    public static String getCurrentDateTime(String format) {
+        DateFormat dateFormatter = new SimpleDateFormat(format);
+        dateFormatter.setLenient(false);
+        dateFormatter.setTimeZone(Calendar.getInstance().getTimeZone());
+        Date today = new Date();
+        String s = dateFormatter.format(today);
+        Log.e("today_Date", "" + s);
+        return s;
     }
 
 }

@@ -1,50 +1,47 @@
 package com.example.axxesscodingdemoapp.adapter;
 
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.view.ViewGroup;
-import android.content.Context;
-import android.widget.TextView;
-import android.widget.ImageView;
-import android.view.LayoutInflater;
-import android.widget.LinearLayout;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.axxesscodingdemoapp.R;
-import com.example.axxesscodingdemoapp.model.DataInfo;
 import com.example.axxesscodingdemoapp.interfaces.RvClickListener;
+import com.example.axxesscodingdemoapp.model.DataInfo;
 import com.example.axxesscodingdemoapp.utils.Utils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.List;
 
 /**
  * Created by ketan 18-9-2020.
  */
-public class ImagesListAdapter extends RecyclerView.Adapter<ImagesListAdapter.ViewHolder> {
-    private List<DataInfo> dataList;
-
-    private Context context;
+public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.ViewHolder> {
     private View itemView;
-
+    private Context context;
+    private JSONArray dataList;
     private RvClickListener rvClickListener;
 
-    public ImagesListAdapter(Context context, List<DataInfo> dataList) {
+    public CommentListAdapter(Context context, JSONArray dataList) {
         this.context = context;
         this.dataList = dataList;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView ivImage;
+        TextView tvComment;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            ivImage = itemView.findViewById(R.id.iv_image);
+            tvComment = itemView.findViewById(R.id.tv_comment);
         }
     }
 
@@ -55,7 +52,7 @@ public class ImagesListAdapter extends RecyclerView.Adapter<ImagesListAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        itemView = LayoutInflater.from(context).inflate(R.layout.row_image_list, parent, false);
+        itemView = LayoutInflater.from(context).inflate(R.layout.row_comment_layout, parent, false);
 
         ViewHolder vh = new ViewHolder(itemView);
 
@@ -75,18 +72,15 @@ public class ImagesListAdapter extends RecyclerView.Adapter<ImagesListAdapter.Vi
     @SuppressLint("NewApi")
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-
-        if (dataList.get(position).getImages() != null && dataList.get(position).getImages().size() > 0)
-            Utils.ImageLoaderWith(context, dataList.get(position).getImages().get(0).getLink(), holder.ivImage);
-
-        itemView.setOnClickListener(view -> {
-            rvClickListener.rv_click(position,position,"");
-        });
-
+        try {
+            holder.tvComment.setText(""+dataList.getJSONObject(position).getString("comment") +" "+ dataList.getJSONObject(position).getString("created_date_time"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public int getItemCount() {
-        return dataList.size();
+        return dataList.length();
     }
 }

@@ -6,42 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".activities.DetailImageActivity">
 
-    <ImageView
-        android:id="@+id/iv_detail_image"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_margin="10dp"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginBottom="60dp"
+                tools:layout_editor_absoluteX="5dp">
 
-    <EditText
-        android:id="@+id/edt_comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="Add a Commnet"
-        android:textColor="@color/colorPrimary"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/iv_detail_image"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/iv_detail_image"
-        app:layout_constraintTop_toBottomOf="@+id/iv_detail_image"
-        app:layout_constraintVertical_bias="0.19" />
+                <ImageView
+                    android:id="@+id/iv_detail_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_margin="10dp" />
 
-    <Button
-        android:id="@+id/btn_comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Commnet"
-        android:textAllCaps="false"
-        android:layout_marginTop="36dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/edt_comment"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/edt_comment"
-        app:layout_constraintTop_toBottomOf="@+id/edt_comment" />
+                <TextView
+                    android:id="@+id/tv_previous_comments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Previous Comments"
+                    android:textStyle="bold"
+                    android:textSize="25sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_comment_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp" />
+
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/rl_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layout_editor_absoluteX="-104dp">
+
+                <EditText
+                    android:id="@+id/edt_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/rounded_background"
+                    android:hint="Add a Commnet"
+                    android:padding="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/black" />
+
+                <ImageView
+                    android:id="@+id/iv_comment"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_baseline_send_24" />
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
