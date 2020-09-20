@@ -31,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="Previous Comments"
+                    android:text="@string/previous_comment"
                     android:textStyle="bold"
                     android:textSize="25sp" />
 
@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:background="@drawable/rounded_background"
-                    android:hint="Add a Commnet"
+                    android:hint="@string/add_comment"
                     android:padding="10dp"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@android:color/black" />

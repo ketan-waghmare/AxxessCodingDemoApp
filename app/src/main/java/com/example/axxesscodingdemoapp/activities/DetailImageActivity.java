@@ -49,9 +49,9 @@ public class DetailImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_image);
 
         setupUI();
-        getComment();
         setupEvents();
         getIntentExtras();
+        getCommentFromDB();
         setReceivedImage();
         setImageTitlewithBack();
     }
@@ -60,7 +60,7 @@ public class DetailImageActivity extends AppCompatActivity {
      * we get the json array of comments by passing image id
      * and the json array is set to the comment list adapter
      */
-    private void getComment() {
+    private void getCommentFromDB() {
         JSONArray jsonArray = dataBaseHelper.getCommentFromDatabase(imageId);
         setCommentListAdapter(jsonArray);
     }
@@ -101,7 +101,7 @@ public class DetailImageActivity extends AppCompatActivity {
         contentValues.put(DataBaseConstants.Constants_TBL_COMMENT.CREATED_DATE_TIME,Utils.getCurrentDateTime(Utils.MM_DD_YYY_HH_MM));
 
         dataBaseHelper.saveToLocalTable(DataBaseConstants.TableNames.TBL_COMMENT,contentValues);
-        getComment();
+        getCommentFromDB();
     }
 
     /**

@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@null"
+                android:hint="@string/enter_name"
                 android:layout_margin="10dp" />
 
         </LinearLayout>
